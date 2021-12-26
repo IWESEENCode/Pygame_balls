@@ -36,6 +36,12 @@ pygame.display.set_caption("Шарики")
 score = 0
 movespeed_x = 3
 movespeed_y = 3
+
+finished = False
+need_click = False
+
+clock = pygame.time.Clock()
+
 # main defines
 def draw_ball():
     global ball_x, ball_y, ball_r, color
@@ -63,16 +69,10 @@ def player_scores():
     screen.blit(text1, (10, 50))
     screen.blit(text2, (150, 50))
 
+# TODO: need to create a class ball and add him opportunity
+# to rebound out of themselves
 
-
-clock = pygame.time.Clock()
-
-finished = False
-need_click = False
-
-left = False
-right = False
-
+# main loop
 while not finished:
     clock.tick(FPS)
     
@@ -82,7 +82,7 @@ while not finished:
         draw_ball()
         draw_ball()
         need_click = True
-    
+
     if need_click:
         ball_x += movespeed_x
         ball_y += movespeed_y
@@ -94,7 +94,6 @@ while not finished:
             movespeed_x *= -1
         if ball_y + ball_r + 10 >= win_y:
             movespeed_y *= -1
-        
     
     screen.fill((dark_grey))
     player_scores()
